@@ -14,29 +14,38 @@ const ShoppingListData = [
 ];
 
 const ShoppingItem = ({ name, quantity, checked }) => {
-  return (
+  return(
     <div className={styles['shopping-item']}>
       <div className={styles.section}>
-        <p>{name}</p>
-        <p className={styles.badge}>{quantity}</p>
+        {name.length <= 2 ? <p className={styles["red-title"]}>{name}</p> :
+          <p style={{color: name.length <= 2 ? "red" : "green"}}>{name}</p>}
+        {quantity === 1 ? null : <p className={styles.badge}>{quantity}</p>}
       </div>
       <div className={styles.section}>
         <input type="checkbox" defaultChecked={checked} />
       </div>
     </div>
-  );
+  )
 };
+
+const shoppingItemsFilter = ShoppingListData.filter(item => item.quantity > 0)
 
 const ShoppingList = () => {
   return (
     <div className={styles['shopping-list']}>
       <h2>Shopping List</h2>
       <div className={styles['shopping-list-items']}>
-        {/* 💣 supprime cette ligne */}
-        <ShoppingItem name="Milk" quantity={2} checked={false} />
-        {/* 🦁 Fais une liste en utilisant ShoppingListData */}
-        {/* 💡 ShoppingListData.map(item => ()) */}
-        {/* 💡 N'oublie pas la `key` */}
+        {shoppingItemsFilter
+          .map((item) => {
+            return (
+              <ShoppingItem
+                key={item.id}
+                name={item.name}
+                quantity={item.quantity}
+                checked={item.checked}
+              />
+            )
+          })}
       </div>
     </div>
   );

@@ -2,5 +2,20 @@
   background-color: var(--background-color);
   padding: var(--padding);
   font-size: var(--font-size);
+  transition: all 0.5s;
+  border: 0;
+  border-radius: 4px;
   /* default styles... */
+}
+
+.button:hover {
+  scale: 1.1;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
